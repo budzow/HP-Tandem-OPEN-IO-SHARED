@@ -1,0 +1,31 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. FileOpenClose.
+
+ENVIRONMENT DIVISION.
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.
+    SELECT DataFile ASSIGN TO "datafile.dat"
+        ORGANIZATION IS LINE SEQUENTIAL
+        ACCESS MODE IS SEQUENTIAL.
+
+DATA DIVISION.
+FILE SECTION.
+FD  DataFile.
+01  DataRecord PIC X(80).
+
+WORKING-STORAGE SECTION.
+
+PROCEDURE DIVISION.
+    OPEN I-O DataFile SHARED
+    IF NOT DataFile-STATUS = "00"
+        DISPLAY "Error opening file"
+        STOP RUN
+    END-IF.
+
+    CLOSE DataFile
+    IF NOT DataFile-STATUS = "00"
+        DISPLAY "Error closing file"
+        STOP RUN
+    END-IF.
+
+    STOP RUN.

@@ -16,7 +16,7 @@ FD  DataFile.
 WORKING-STORAGE SECTION.
 
 PROCEDURE DIVISION.
-    OPEN I-O DataFile SHARED
+    OPEN I-O DataFile PROTECTED
     IF NOT DataFile-STATUS = "00"
         DISPLAY "Error opening file"
         STOP RUN
